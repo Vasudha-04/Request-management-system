@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { requests } from "@/lib/store"; // Adjust path as needed
-import { Request, Status, Role } from "@/types";
+import { AppRequest, Status, Role } from "@/lib/types";
 import { z } from "zod";
 
 // Zod schema for input validation (Requirement #9)
@@ -20,12 +20,12 @@ export async function GET() {
   return NextResponse.json(requests);
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const validatedData = CreateRequestSchema.parse(body);
 
-    const newRequest: Request = {
+    const newRequest: AppRequest = {
       id: Date.now().toString(),
       title: validatedData.title,
       description: validatedData.description,
@@ -34,13 +34,18 @@ export async function POST(req: Request) {
     };
 
     requests.push(newRequest);
+
     return NextResponse.json(newRequest, { status: 201 });
+
   } catch (error) {
-    return NextResponse.json({ error: "Invalid input data" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid input data" },
+      { status: 400 }
+    );
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
     const { id, status, role } = UpdateStatusSchema.parse(body);
