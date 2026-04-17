@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Request Management System:
 
-## Getting Started
+A full-stack web application built with Next.js that implements a structured workflow for managing requests. The system features Role-Based Access Control and a Finite State Machine to enforce strict status transitions.
 
-First, run the development server:
+Features:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Role Switching: Toggle between Creator and Reviewer roles to test different permissions.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+State Machine Logic: Requests follow a strict path: Draft → Submitted → Approved/Rejected.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Backend Validation: All inputs are validated using Zod and TypeScript to ensure data integrity.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Responsive UI: Built with Tailwind CSS for a clean, modern experience.
 
-## Learn More
+Tech Stack:
+Framework: Next.js 
 
-To learn more about Next.js, take a look at the following resources:
+Language: TypeScript
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Validation: Zod
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Styling: CSS
 
-## Deploy on Vercel
+Storage: In-memory (Server-side variable)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Workflow:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The system enforces the following state transitions:
+
+Current Status            Allowed Next Status             Required Role
+Draft                     Submitted, Cancelled            Creator 
+Submitted                 Approved, Rejected, Cancelled   Reviewer (Approve/Reject), Creator (Cancel)
+Approved                  (End State)                     N/A
+Rejected                  (End State)                     N/A
+Cancelled                 (End State)                     N/A
+
+Final structure should look like:
+
+<img width="1040" height="780" alt="WhatsApp Image 2026-04-17 at 6 35 59 PM" src="https://github.com/user-attachments/assets/7fe58b3c-bdd6-4314-86d7-142455ac1c94" />
+
+
