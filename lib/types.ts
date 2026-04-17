@@ -7,7 +7,7 @@ export type Status =
   | "REJECTED"
   | "CANCELLED";
 
-export interface Request {
+export interface AppRequest {
   id: string;
   title: string;
   description: string;
