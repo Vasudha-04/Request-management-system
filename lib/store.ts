@@ -1,3 +1,3 @@
-import { Request } from "./types";
+import { AppRequest } from "./types";
 
-export const requests: Request[] = [];
+export const requests: AppRequest[] = [];
