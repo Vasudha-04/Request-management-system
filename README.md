@@ -13,13 +13,14 @@ Backend Validation: All inputs are validated using Zod and TypeScript to ensure 
 Responsive UI: Built with Tailwind CSS for a clean, modern experience.
 
 Tech Stack:
-Framework: Next.js 
+
+Framework: Next.js+ React + Typesript
 
 Language: TypeScript
 
 Validation: Zod
 
-Styling: CSS
+Styling: CSS(Tailwind)
 
 Storage: In-memory (Server-side variable)
 
