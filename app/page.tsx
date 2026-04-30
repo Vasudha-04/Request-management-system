@@ -55,10 +55,10 @@ export default function Home() {
       </h1>
 
       {/* --- Section 1: Controls (Role & Create) --- */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div className={`grid ${role === "CREATOR" ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1"} gap-8 mb-12`}>
         
         {/* Role Selector Card */}
-        <div className="md:col-span-1 bg-white p-6 shadow-lg rounded-2xl border border-gray-100 flex flex-col justify-center">
+        <div className={`${role === "CREATOR" ? "md:col-span-1" : ""} bg-white p-6 shadow-lg rounded-2xl border border-gray-100 flex flex-col justify-center`}>
           <label className="block text-sm font-semibold text-gray-600 mb-2">
             Active Role
           </label>
@@ -75,37 +75,39 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Create Request Card */}
-        <div className="md:col-span-2 bg-white p-6 shadow-lg rounded-2xl border border-gray-100">
-          <h2 className="text-2xl font-bold mb-5 text-gray-800">Create New Request</h2>
-          
-          <div className="flex flex-col gap-4">
-            {/* Title */}
-            <input
-              className="w-full border border-gray-300 px-4 py-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="Request Title (e.g., Annual Leave Request)"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
+        {/* Create Request Card - Only for CREATOR */}
+        {role === "CREATOR" && (
+          <div className="md:col-span-2 bg-white p-6 shadow-lg rounded-2xl border border-gray-100">
+            <h2 className="text-2xl font-bold mb-5 text-gray-800">Create New Request</h2>
             
-            {/* Description */}
-            <textarea
-              className="w-full border border-gray-300 px-4 py-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
-              placeholder="Provide more details or reasons..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={3}
-            />
-            
-            {/* Action Button */}
-            <button
-              className="w-full md:w-auto self-end bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-700 transition duration-150 shadow-md hover:shadow-lg"
-              onClick={createRequest}
-            >
-              Initialize Request
-            </button>
+            <div className="flex flex-col gap-4">
+              {/* Title */}
+              <input
+                className="w-full border border-gray-300 px-4 py-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="Request Title (e.g., Annual Leave Request)"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              
+              {/* Description */}
+              <textarea
+                className="w-full border border-gray-300 px-4 py-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
+                placeholder="Provide more details or reasons..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows={3}
+              />
+              
+              {/* Action Button */}
+              <button
+                className="w-full md:w-auto self-end bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-700 transition duration-150 shadow-md hover:shadow-lg"
+                onClick={createRequest}
+              >
+                Initialize Request
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
 
